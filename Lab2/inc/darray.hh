@@ -1,0 +1,43 @@
+#ifndef DARRAY_HH
+#define DARRAY_HH
+
+#define STARTSIZE 10 //liczba elementow, ktora pomiesci tablica po inicjalizacji
+
+
+class DArray {
+
+	private:
+
+	int *tab; // wskaznik na poczatek tablicy
+	unsigned int size; // liczba elementow tablicy, ktorej przydzielono wartosci
+	unsigned int allocatedSize; //liczba elementów dla których jest zaalokowana pamięć
+
+	void increaseTab1(void);
+	void increaseTab2(void);
+	void decreaseTab(void);
+
+	public:
+
+	DArray() {
+		tab = new int[STARTSIZE]; //rezerwacja pamieci dla STARTSIZE elementow
+		size = 0;
+		allocatedSize = STARTSIZE; //tablica na początku ma rozmiar STARTSIZE
+	}
+
+	~DArray() {
+		delete []tab; //zwalnianie pamieci
+	}
+ 
+	//przeciążenia operatora indeksowania z zabezpieczeniami wyjścia poza zakres
+	int operator [](unsigned int index)const;
+    int &operator [](unsigned int index);
+
+	void displayTab(void)const; // wyświetla elementy tablicy
+	int showSize(void)const; // zwraca liczbę elementów w tablicy
+	int showCapacity(void)const; // zwraca liczbę elementów dla których jest zarezewowana pamięć
+	void addElem1(int value); //metoda dodająca element na koniec tablicy, gdy za malo miejsca powieksza tablice o 1 element
+	void addElem2(int value); //metoda dodająca element na koniec tablicy, gdy za malo miejsca powieksza tablice o 2 razy
+	void delElem(int value); //metoda usuwająca ostatni element w tablicy
+};
+
+#endif 

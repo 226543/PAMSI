@@ -1,11 +1,14 @@
 G = g++
 GFLAGS = -Wall -pedantic -g -std=c++11 -Iinc
 
-tablica: obj/tablica.o src/main.cpp inc/tablica.hh
-	$(G) $(GFLAGS) ./obj/tablica.o ./src/main.cpp -o tablica
+__start__: tab
+	./tab
+	
+tab: obj/darray.o src/main.cpp inc/darray.hh
+	$(G) $(GFLAGS) ./obj/darray.o ./src/main.cpp -o tab
 
-obj/tablica.o: src/tablica.cpp inc/tablica.hh
-	$(G) $(GFLAGS) -c ./src/tablica.cpp -o ./obj/tablica.o
+obj/darray.o: src/darray.cpp inc/darray.hh
+	$(G) $(GFLAGS) -c ./src/darray.cpp -o ./obj/darray.o
 
 clean:
-	rm -fr ./obj/*.o tablica
+	rm -fr ./obj/*.o tab

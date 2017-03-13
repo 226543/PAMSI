@@ -1,16 +1,27 @@
 #include <iostream>
-#include "tablica.hh"
+#include <sys/time.h> 
+#include "darray.hh"
 
 using namespace std;
 
-int main(){
-	Tablica test;
+int main() {
 
-	test.dodajElement(2);
-	test.dodajElement(3);
-	test.dodajElement(4);
-	test.dodajElement(5);
-	test.dodajElement(7);
-	test.wyswietlTablice();
+	DArray tab;
+	struct timeval startTime, endTime;
+    double duration;
+    
+    gettimeofday(&startTime, NULL);
+
+	for(unsigned int i = 0; i<10000; ++i) {
+		tab.addElem2(1);
+	};
+	
+	gettimeofday(&endTime, NULL);
+
+	duration = (endTime.tv_sec - startTime.tv_sec) * 1000.0;      // sec to ms
+    duration += (endTime.tv_usec - startTime.tv_usec) / 1000.0;   // us to ms
+
+    cout << duration << " ms \n";
+	
 	return 0;
 }
