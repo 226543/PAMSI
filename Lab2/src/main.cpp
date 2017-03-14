@@ -12,7 +12,7 @@ int main() {
     
     gettimeofday(&startTime, NULL);
 
-	for(unsigned int i = 0; i<10000; ++i) {
+	for(unsigned int i = 0; i<1000000; ++i) {
 		tab.addElem2(1);
 	};
 	
@@ -22,6 +22,7 @@ int main() {
     duration += (endTime.tv_usec - startTime.tv_usec) / 1000.0;   // us to ms
 
     cout << duration << " ms \n";
+    cout << tab.showSize() << endl << tab.showCapacity() << endl;
 	
 	return 0;
-}
+} 

@@ -2,7 +2,7 @@
 #include "darray.hh"
 
 
-void DArray::increaseTab1(void) {
+void DArray::expandTab1(void) {
 
 	int *tempTab = new int[1+size];
 
@@ -14,7 +14,7 @@ void DArray::increaseTab1(void) {
 	tab = tempTab;
 }
 
-void DArray::increaseTab2(void) {
+void DArray::expandTab2(void) {
 
 	int *tempTab = new int[2*size];
 
@@ -26,7 +26,7 @@ void DArray::increaseTab2(void) {
 	tab = tempTab;
 }
 
-void DArray::decreaseTab(void) {
+void DArray::shrinkTab(void) {
 
 	//TODO
 }
@@ -34,7 +34,7 @@ void DArray::decreaseTab(void) {
 void DArray::addElem1(int value) {
 
 	if(size >= allocatedSize) {
-		increaseTab1();
+		expandTab1();
 		allocatedSize +=1;
 	}
 	tab[size] = value;
@@ -44,7 +44,7 @@ void DArray::addElem1(int value) {
 void DArray::addElem2(int value) {
 
 	if(size >= allocatedSize) {
-		increaseTab2();
+		expandTab2();
 		allocatedSize *=2;
 	}
 	tab[size] = value;

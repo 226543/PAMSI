@@ -12,9 +12,9 @@ class DArray {
 	unsigned int size; // liczba elementow tablicy, ktorej przydzielono wartosci
 	unsigned int allocatedSize; //liczba elementów dla których jest zaalokowana pamięć
 
-	void increaseTab1(void);
-	void increaseTab2(void);
-	void decreaseTab(void);
+	void expandTab1(void);
+	void expandTab2(void);
+	void shrinkTab(void);
 
 	public:
 
