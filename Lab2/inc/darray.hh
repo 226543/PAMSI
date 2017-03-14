@@ -30,7 +30,7 @@ class DArray {
  
 	//przeciążenia operatora indeksowania z zabezpieczeniami wyjścia poza zakres
 	int operator [](unsigned int index)const;
-        int &operator [](unsigned int index);
+    int &operator [](unsigned int index);
 
 	void displayTab(void)const; // wyświetla elementy tablicy
 	int showSize(void)const; // zwraca liczbę elementów w tablicy
