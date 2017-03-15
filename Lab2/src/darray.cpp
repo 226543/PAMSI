@@ -10,7 +10,7 @@ void DArray::expandTab1(void) {
 	for(unsigned int i = 0; i<=size-1; ++i) {
 		tempTab[i] = tab[i];
 	} 
-	delete [] tab; // zwalnianie pamięci przed przypisaniem nowej wartości
+	delete [] tab;
 	tab = tempTab;
 }
 
@@ -22,7 +22,7 @@ void DArray::expandTab2(void) {
 	for(unsigned int i = 0; i<=size-1; ++i) {
 		tempTab[i] = tab[i];
 	} 
-	delete [] tab; // zwalnianie pamięci przed przypisaniem nowej wartości
+	delete [] tab; 
 	tab = tempTab;
 }
 
@@ -64,7 +64,7 @@ void DArray::displayTab(void)const {
 			std::cout << tab[i] << " ";
 		}
 	}
-	else{
+	else {
 		std::cout<<"Pusta Tablica"<<std::endl;
 	}
 	std::cout << std::endl;
@@ -75,7 +75,7 @@ void DArray::displayTab(void)const {
 int DArray::operator [](unsigned int index)const {
 	
 // zabezpiecznie przed wyjściem poza zakres, wyświetla komunikat i zamyka program
-	if(size == 0 || index > size-1) {
+	if((int)index > (int)size-1) {
 		std::cerr << "Bład! Indeks operatora[] jest poza zakresem" <<std::endl;
 		exit(EXIT_FAILURE);
 	}
@@ -86,7 +86,7 @@ int DArray::operator [](unsigned int index)const {
 int& DArray::operator [](unsigned int index) {
 
 // zabezpiecznie przed wyjściem poza zakres, wyświetla komunikat i zamyka program
-	if(size == 0 || index > size-1) {
+	if((int)index > (int)size-1) {
 		std::cerr << "Bład! Indeks operatora[] jest poza zakresem" <<std::endl;
 		exit(EXIT_FAILURE); 
 	}

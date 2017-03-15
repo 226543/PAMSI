@@ -10,10 +10,10 @@ int main() {
 	struct timeval startTime, endTime;
     double duration;
     
-        gettimeofday(&startTime, NULL);
+    gettimeofday(&startTime, NULL);
 
-	for(unsigned int i = 0; i<1000000; ++i) {
-		tab.addElem2(1);
+	for(unsigned int i = 0; i<9992; ++i) {
+		tab.addElem2(i);
 	};
 	
 	gettimeofday(&endTime, NULL);
@@ -21,9 +21,10 @@ int main() {
 	duration = (endTime.tv_sec - startTime.tv_sec) * 1000.0;      // sec to ms
     duration += (endTime.tv_usec - startTime.tv_usec) / 1000.0;   // us to ms
 
-    cout << duration << " ms \n";
-    cout << tab.showSize() << endl << tab.showCapacity() << endl;
-	
+    cout << "Czas wykonania " << duration << " ms \n";
+    cout << "Pamięć zarezewowana na " << tab.showCapacity() << " elementów\n"
+         << "Tablica ma " << tab.showSize() << " elementów." << endl;
+
 	return 0;
 } 
 
