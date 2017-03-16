@@ -1,0 +1,1 @@
+Do pomiaru czasu wykorzystałem kod dostępny na stronie: http://www.songho.ca/misc/timer/timer.html
