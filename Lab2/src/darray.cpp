@@ -26,9 +26,28 @@ void DArray::expandTab2(void) {
 	tab = tempTab;
 }
 
-void DArray::shrinkTab(void) {
+void DArray::shrinkTab1(void) {
 
-	//TODO
+	int *tempTab = new int[size-1];
+
+	// kopiowanie starej tablicy do nowej
+	for(unsigned int i = 0; i<=size-1; ++i) {
+		tempTab[i] = tab[i];
+	} 
+	delete [] tab;
+	tab = tempTab;
+}
+
+void DArray::shrinkTab2(void) {
+
+	int *tempTab = new int[size/2];
+
+	// kopiowanie starej tablicy do nowej
+	for(unsigned int i = 0; i<=size-1; ++i) {
+		tempTab[i] = tab[i];
+	} 
+	delete [] tab;
+	tab = tempTab;
 }
 
 void DArray::addElem1(int value) {
@@ -51,9 +70,31 @@ void DArray::addElem2(int value) {
 	++size;
 }
 
-void DArray::delElem(int value) {
+void DArray::delElem1(void) {
 
-	//TODO
+	if(size > 0) {
+		shrinkTab1();
+		allocatedSize -=1;
+		--size;
+	}
+	else {
+		std::cout << "Próbujesz usunąć element z pustej tablicy" << std::endl;
+	}
+}
+
+void DArray::delElem2(void) {
+
+	if(size == 0) {
+		std::cout << "Próbujesz usunąć element z pustej tablicy" << std::endl;
+	}
+	else if(size <= allocatedSize/2) {
+		shrinkTab2();
+		allocatedSize /=2;
+		--size;
+	}
+	else {
+		--size;
+	}	
 }
 
 
