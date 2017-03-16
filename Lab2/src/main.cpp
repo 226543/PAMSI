@@ -24,7 +24,7 @@ int main() {
 
 	cout << "Czas wykonania " << duration << " ms \n";
 	cout << "Pamięć zarezewowana na " << tab.showCapacity() << " elementów\n"
-         << "Tablica ma " << tab.showSize() << " elementów." << endl;
+		 << "Tablica ma " << tab.showSize() << " elementów." << endl;
 
 	return 0;
 } 

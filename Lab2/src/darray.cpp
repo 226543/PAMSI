@@ -78,14 +78,14 @@ void DArray::delElem1(void) {
 		--size;
 	}
 	else {
-		std::cout << "Próbujesz usunąć element z pustej tablicy" << std::endl;
+		std::cerr << "Próbujesz usunąć element z pustej tablicy" << std::endl;
 	}
 }
 
 void DArray::delElem2(void) {
 
 	if(size == 0) {
-		std::cout << "Próbujesz usunąć element z pustej tablicy" << std::endl;
+		std::cerr << "Próbujesz usunąć element z pustej tablicy" << std::endl;
 	}
 	else if(size <= allocatedSize/2) {
 		shrinkTab2();
@@ -106,7 +106,7 @@ void DArray::displayTab(void)const {
 		}
 	}
 	else {
-		std::cout<<"Pusta Tablica"<<std::endl;
+		std::cerr<<"Pusta Tablica"<<std::endl;
 	}
 	std::cout << std::endl;
 }
