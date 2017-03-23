@@ -132,7 +132,7 @@ int DArray::showCapacity()const {
 	return allocatedSize;
 }
 
-void DArray::doThings(int mode,unsigned int amount) {
+void DArray::doThings(unsigned int amount,int mode) {
 	if(mode == 1) {
 		for(unsigned int i = 0; i < amount; ++i) {
 			addElem1(i);
@@ -146,4 +146,11 @@ void DArray::doThings(int mode,unsigned int amount) {
 	else {
 		std::cout << "Wybrano złą metodę" << std::endl;
 	}
+}
+
+void DArray::restart(){
+	delete [] tab;
+	tab = new int[10];
+	size = 0;
+	allocatedSize = 10;
 }

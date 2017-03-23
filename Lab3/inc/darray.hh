@@ -43,7 +43,8 @@ class DArray : public Measurable {
 	void delElem1();			   // metoda usuwająca ostatni element i pomniejsza tablice o jeden element
 	void delElem2();          	   // metoda usuwająca ostatni element, gdy jest możliwe to pomniejsza tablicę o połowę
 
-	void doThings(int mode,unsigned int amount);
+	void doThings(unsigned int amount,int mode);
+	void restart();
 };
 
 #endif

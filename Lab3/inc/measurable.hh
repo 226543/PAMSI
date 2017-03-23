@@ -3,7 +3,8 @@
 
 class Measurable {
   public:
-  virtual void doThings(int mode,unsigned amount) = 0;
+  virtual void doThings(unsigned amount,int mode) = 0;
+  virtual void restart() = 0;
 };
 
 #endif
