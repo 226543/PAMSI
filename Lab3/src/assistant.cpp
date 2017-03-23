@@ -11,10 +11,10 @@ void Assistant::measure(Measurable &obj,int amountOfData,
       stopwatch1.reset();
       obj.restart();
     }
-    std::cout << calcAverage(numberOfReps);
+    std::cout << "Średni czas wykonania to " << getAverage(numberOfReps) << std::endl;
 }
 
-double Assistant::calcAverage(int numberOfReps){
+double Assistant::getAverage(int numberOfReps){
   double sum;
   for(int i = 0; i < numberOfReps; ++i){
     sum += results[i];

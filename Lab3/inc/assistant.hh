@@ -5,10 +5,10 @@
 
 class Assistant {
   private:
-  double *results;
+  double *results; //tablica służąca do przechowywania wyników pomiarów
   Stopwatch stopwatch1;
 
-  double calcAverage(int numberOfReps);
+  double getAverage(int numberOfReps);
 
   public:
   Assistant(){
