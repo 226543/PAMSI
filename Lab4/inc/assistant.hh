@@ -11,13 +11,13 @@ class Assistant {
   double getAverage(int numberOfReps);
 
   public:
-  Assistant(){
+  Assistant() {
     results = new double [20];
   }
-  Assistant(int size){
+  Assistant(int size) {
     results = new double [size];
   }
-  ~Assistant(){
+  ~Assistant() {
     delete [] results;
   }
   void measure(Measurable &obj,int amountOfData,int numberOfReps,int mode);

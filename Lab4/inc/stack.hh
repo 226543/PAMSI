@@ -10,17 +10,17 @@ class Stack : public iStack, public Measurable {
   int topElem;
 
   public:
-  Stack(){
+  Stack() {
     capacity = 10;
     tab = new int[capacity];
     topElem = -1;
   }
-  Stack(int p){
+  Stack(int p) {
     capacity = p;
     tab = new int[capacity];
     topElem = -1;
   }
-  ~Stack(){
+  ~Stack() {
     delete []tab;
   }
 
@@ -31,7 +31,7 @@ class Stack : public iStack, public Measurable {
   int pop();
   int top();
 
-  void doThings(unsigned int amount,int mode);
+  void doThings(unsigned int amount,int mode = 0);
   void restart();
 };
 

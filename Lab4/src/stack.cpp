@@ -39,7 +39,7 @@ void Stack::doThings(unsigned int amount,int mode) {
 	}
 }
 
-void Stack::restart(){
+void Stack::restart() {
 	delete [] tab;
 	tab = new int[capacity];
 	topElem = -1;

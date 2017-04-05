@@ -8,10 +8,10 @@ class DArray : public Measurable {
 	unsigned int size;               // liczba elementow tablicy, ktorej przydzielono wartosci
 	unsigned int allocatedSize;      // liczba elementów dla których jest zaalokowana pamięć
 
-	void expandTab1(void);
-	void expandTab2(void);
-	void shrinkTab1(void);
-	void shrinkTab2(void);
+	void expandTab1();
+	void expandTab2();
+	void shrinkTab1();
+	void shrinkTab2();
 
 	public:
 	DArray() {
