@@ -40,7 +40,7 @@ int main() {
 	for(int i = 0; i <= 10; ++i) {
 		tab = i;
 	}
-	quickSort(tab,0,5);
+	quickSort(tab,0,tab.showSize()-1);
 
 	return 0;
 }
