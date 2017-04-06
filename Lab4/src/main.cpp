@@ -8,7 +8,7 @@ using namespace std;
 
 int main() {
 	Assistant helper;
-	List obj;
+	Stack obj(1000000);
 
 	int amountOfData = 1000000;     // liczba próbek
 	int reps = 20;                 // liczba powtórzeń obliczeń

@@ -33,6 +33,8 @@ class Stack : public iStack, public Measurable {
 
   void doThings(unsigned int amount,int mode = 0);
   void restart();
+
+  void find(int i);
 };
 
 #endif
