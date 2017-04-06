@@ -126,6 +126,8 @@ void List::doThings(unsigned int amount,int mode) {
 for(unsigned int i = 0; i < amount; ++i) {
 		addBack(i);
 	}
+  addBack(-1);
+  find(-1);
 }
 
 void List::restart() {
@@ -135,8 +137,24 @@ void List::restart() {
 }
 
 List::~List() {
-  if(trailer != header ){
-    delete trailer;
+  while(!isEmpty()) {
+    removeBack();
   }
+  delete trailer;
   delete header;
+}
+
+void List::find(int numb) {
+  Node* temp = header->getNext();
+  int counter = 0;
+  while(temp != trailer) {
+    if(temp->getValue() == numb) {
+      std::cout << "Znaleziono " << numb
+                << " na " << counter << " pozycji!\n";
+    }
+    else {
+      ++counter;
+    }
+    temp = temp->getNext();
+  }
 }
