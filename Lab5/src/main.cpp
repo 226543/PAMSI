@@ -8,7 +8,7 @@ DArray quickSort(DArray tab,int left, int right) {
 	int i = left;
 	int j = right;
 
-	int pivot = tab[size];
+	int pivot = tab[tab.showSize()-1];
 	while(i <= j) {
 		while(tab[i] < pivot) {
 			++i;
@@ -41,6 +41,6 @@ int main() {
 		tab = i;
 	}
 	quickSort(tab,0,5);
-	
+
 	return 0;
 }
