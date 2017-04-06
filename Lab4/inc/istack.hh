@@ -3,10 +3,10 @@
 
 class iStack {
   public:
-  virtual int size() = 0;
+  virtual int size()const = 0;
   virtual void push(int value) = 0;
   virtual int pop() = 0;
-  virtual bool isEmpty() = 0;
+  virtual bool isEmpty()const = 0;
   virtual int top() = 0;
 };
 
