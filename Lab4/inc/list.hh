@@ -5,13 +5,11 @@
 
 class List : public iList, public Measurable {
   private:
-  Node* header;
-  Node* trailer;
+  Node* header = new Node();
+  Node* trailer = new Node();
 
   public:
   List() {
-    Node* header = new Node;
-    Node* trailer = new Node;
     header->setNext(trailer);
     trailer->setPrev(header);
 

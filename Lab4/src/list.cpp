@@ -32,7 +32,10 @@ void List::addFront(int value) {
 }
 
 void List::addBack(int value) {
-  Node* newNode = new Node(value,trailer->getPrev(),trailer);
+  Node* newNode = new Node;
+  newNode->setValue(value);
+  newNode->setPrev(trailer->getPrev());
+  newNode->setNext(trailer);
   (trailer->getPrev())->setNext(newNode);
   trailer->setPrev(newNode);
 }
@@ -58,9 +61,17 @@ int List::removeFront() {
 }
 
 int List::removeBack() {
-  int removedValue;
-  removedValue = removeBefore(trailer->getPrev());
-  return removedValue;
+  int temp = 0;
+  Node* nodeToRemove = trailer->getPrev();
+  Node* nodeBeforeRemoved = nodeToRemove->getPrev();
+  temp = nodeToRemove->getValue();
+
+  nodeBeforeRemoved->setNext(trailer);
+  trailer->setPrev(nodeBeforeRemoved);
+
+  delete nodeToRemove;
+
+  return temp;
 }
 
 Node* List::get(unsigned int position) {
@@ -124,9 +135,8 @@ void List::restart() {
 }
 
 List::~List() {
-  while(!isEmpty()) {
-    removeBack();
+  if(trailer != header ){
+    delete trailer;
   }
   delete header;
-  delete trailer;
 }

@@ -10,8 +10,8 @@ int main() {
 	Assistant helper;
 	List obj;
 
-	int amountOfData = 10;     // liczba próbek
-	int reps = 1;                 // liczba powtórzeń obliczeń
+	int amountOfData = 10000;     // liczba próbek
+	int reps = 2;                 // liczba powtórzeń obliczeń
 	int mode = 1;                  // wybór metody
 
 	helper.measure(obj,amountOfData,reps,mode);   // funkcja wyswietla czas sredni

@@ -9,7 +9,7 @@ void Assistant::measure(Measurable &obj,int amountOfData,
       stopwatch1.stop();
       results[i] = stopwatch1.result();
       stopwatch1.reset();
-      obj.restart();
+      //obj.restart();
     }
     std::cout << "Średni czas wykonania to "
               << getAverage(numberOfReps) << std::endl;

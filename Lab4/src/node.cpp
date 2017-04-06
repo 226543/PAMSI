@@ -1,7 +1,7 @@
 #include "node.hh"
 
 int Node::getValue() {
-  return value;
+  return this->value;
 }
 
 void Node::setValue(int newValue) {
@@ -9,11 +9,11 @@ void Node::setValue(int newValue) {
 }
 
 Node* Node::getNext() {
-  return next;
+  return this->next;
 }
 
 Node* Node::getPrev() {
-  return prev;
+  return this->prev;
 }
 
 void Node::setNext(Node* N) {
