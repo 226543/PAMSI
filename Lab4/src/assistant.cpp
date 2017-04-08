@@ -9,7 +9,6 @@ void Assistant::measure(Measurable &obj,int amountOfData,
       obj.doThings(amountOfData,mode);
       stopwatch1.stop();
       results[i] = stopwatch1.result();
-      std::cout << stopwatch1.result() << std::endl;
       stopwatch1.reset();
       obj.restart();
     }
@@ -19,9 +18,8 @@ void Assistant::measure(Measurable &obj,int amountOfData,
 
 double Assistant::getAverage(int numberOfReps) {
   double sum;
-  double reps = (double) numberOfReps;
   for(int i = 0; i < numberOfReps; ++i) {
     sum += results[i];
   }
-  return sum/reps;
+  return sum/numberOfReps;
 }

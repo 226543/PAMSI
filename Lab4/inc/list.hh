@@ -25,7 +25,7 @@ class List : public iList, public Measurable {
   void addFront(int value);
   void addBack(int value);
   void addAfter(Node* nodeBefore,int value);
-  int removeBefore(Node* nodeToRemove);
+  int removeElem(Node* nodeToRemove);
   int removeFront();
   int removeBack();
 

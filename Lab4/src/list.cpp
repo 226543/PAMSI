@@ -6,10 +6,10 @@ bool List::isEmpty()const {
 }
 
 unsigned int List::size()const {
-  Node* temp = trailer;
+  Node* temp = header->getNext();
   unsigned int count = 0;
 
-  while(temp) {
+  while(temp != trailer) {
     ++count;
     temp = temp->getNext();
   }
@@ -26,21 +26,14 @@ void List::addAfter(Node* nodeBefore,int value) {
 }
 
 void List::addFront(int value) {
-  Node* newNode = new Node(value,header,header->getNext());
-  (header->getNext())->setNext(newNode);
-  header->setNext(newNode);
+  addAfter(header,value);
 }
 
 void List::addBack(int value) {
-  Node* newNode = new Node;
-  newNode->setValue(value);
-  newNode->setPrev(trailer->getPrev());
-  newNode->setNext(trailer);
-  (trailer->getPrev())->setNext(newNode);
-  trailer->setPrev(newNode);
+  addAfter(trailer->getPrev(),value);
 }
 
-int List::removeBefore(Node* nodeToRemove) {
+int List::removeElem(Node* nodeToRemove) {
   int temp = 0;
   Node* nodeBefore = nodeToRemove->getPrev();
   Node* nodeAfter = nodeToRemove->getNext();
@@ -56,32 +49,24 @@ int List::removeBefore(Node* nodeToRemove) {
 
 int List::removeFront() {
   int removedValue;
-  removedValue = removeBefore(header->getNext());
+  removedValue = removeElem(header->getNext());
   return removedValue;
 }
 
 int List::removeBack() {
-  int temp = 0;
-  Node* nodeToRemove = trailer->getPrev();
-  Node* nodeBeforeRemoved = nodeToRemove->getPrev();
-  temp = nodeToRemove->getValue();
-
-  nodeBeforeRemoved->setNext(trailer);
-  trailer->setPrev(nodeBeforeRemoved);
-
-  delete nodeToRemove;
-
-  return temp;
+  int removedValue;
+  removedValue = removeElem(trailer->getPrev());
+  return removedValue;
 }
 
 Node* List::get(unsigned int position) {
   Node* temp = header;
-  if(position >= size()) {
+  if(position > size()) {
     std::cout << "Chcesz uzyskac dostep do elementu, ktory nie istnieje! \n";
     exit(EXIT_FAILURE);
   }
   else {
-    for(unsigned int i = 0; i <= position; ++i) {
+    for(unsigned int i = 1; i <= position; ++i) {
       temp = temp->getNext();
     }
   }
@@ -89,35 +74,35 @@ Node* List::get(unsigned int position) {
 }
 
 void List::add(unsigned int position,int value) {
-  if(position == 0) {
+  if(position == 1) {
     addFront(value);
   }
-  else if(position == size()) {
+  else if(position == size()+1) {
     addBack(value);
   }
-  else if(position > size()) {
+  else if(position > size()+1 || position <= 0) {
     std::cout << "Chcesz dodać element poza listą! \n";
     exit(EXIT_FAILURE);
   }
   else {
-    addAfter(get(position-1),value);
+    addAfter(get(position),value);
   }
 }
 
 int List::remove(unsigned int position) {
   int result = 0;
-  if(position == 0) {
+  if(position == 1) {
     result = removeFront();
   }
   else if(position == size()) {
     result = removeBack();
   }
-  else if(position > size()) {
+  else if(position > size() || position <= 0) {
     std::cout << "Chcesz usunąć element poza listą! \n";
     exit(EXIT_FAILURE);
   }
   else {
-    result = removeBefore(get(position));
+    result = removeElem(get(position));
   }
   return result;
 }
@@ -146,17 +131,22 @@ List::~List() {
   delete header;
 }
 
-void List::find(int numb) {
+void List::find(int number) {
   Node* temp = header->getNext();
-  int counter = 0;
-  while(temp != trailer) {
-    if(temp->getValue() == numb) {
-      std::cout << "Znaleziono " << numb
-                << " na " << counter << " pozycji!\n";
+  bool notFound = true;
+  int counter = 1;
+
+  while(temp != trailer && notFound ) {
+    if(temp->getValue() == number) {
+      notFound = false;
     }
     else {
       ++counter;
     }
     temp = temp->getNext();
+  }
+
+  if(notFound) {
+    std::cout << "Tej liczby nie ma w liście!" << std::endl;
   }
 }

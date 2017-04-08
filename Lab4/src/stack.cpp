@@ -36,7 +36,8 @@ int Stack::top(){
 }
 
 void Stack::prepareThings(unsigned int amount) {
-  for(unsigned int i = 0; i < amount; ++i) {
+  push(-1);
+  for(unsigned int i = 0; i < amount-1; ++i) {
     push(i);
   }
 }
