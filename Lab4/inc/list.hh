@@ -32,7 +32,7 @@ class List : public iList, public Measurable {
   void prepareThings(unsigned int amount);
   void doThings(unsigned int amount,int mode = 0);
   void restart();
-  void find(int numb);
+  int find(int numb);
 };
 
 #endif

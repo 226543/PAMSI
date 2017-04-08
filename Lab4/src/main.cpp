@@ -20,10 +20,6 @@ int main() {
 	obj.add(1,1);
 	obj.add(2,2);
 	obj.add(3,3);
-	obj.add(4,4);
-	obj.add(5,5);
-	obj.add(6,6);
-	obj.remove(0);
-	cout << obj.size();
+	obj.find(3);
 	return 0;
 }

@@ -131,22 +131,22 @@ List::~List() {
   delete header;
 }
 
-void List::find(int number) {
+int List::find(int number) {
   Node* temp = header->getNext();
   bool notFound = true;
-  int counter = 1;
+  int position = 1;
 
   while(temp != trailer && notFound ) {
     if(temp->getValue() == number) {
       notFound = false;
     }
     else {
-      ++counter;
+      ++position;
     }
     temp = temp->getNext();
   }
-
   if(notFound) {
     std::cout << "Tej liczby nie ma w liście!" << std::endl;
   }
+  return position;
 }

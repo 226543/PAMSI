@@ -52,7 +52,10 @@ void Stack::restart() {
 	topElem = -1;
 }
 
-void Stack::find(int value) {
-  while(pop() != value);
-
+int Stack::find(int value) {
+  int position = 0;
+  while(pop() != value) {
+    ++position;
+  }
+  return position;
 }
