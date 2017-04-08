@@ -31,6 +31,7 @@ class Stack : public iStack, public Measurable {
   int pop();
   int top();
 
+  void prepareThings(unsigned int amount);
   void doThings(unsigned int amount,int mode = 0);
   void restart();
 

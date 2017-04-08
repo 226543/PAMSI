@@ -122,11 +122,13 @@ int List::remove(unsigned int position) {
   return result;
 }
 
+void List::prepareThings(unsigned int amount) {
+  for(unsigned int i = 0; i < amount; ++i) {
+  		addBack(i);
+  	}
+    addBack(-1);
+}
 void List::doThings(unsigned int amount,int mode) {
-for(unsigned int i = 0; i < amount; ++i) {
-		addBack(i);
-	}
-  addBack(-1);
   find(-1);
 }
 

@@ -35,10 +35,13 @@ int Stack::top(){
   return topElem;
 }
 
+void Stack::prepareThings(unsigned int amount) {
+  for(unsigned int i = 0; i < amount; ++i) {
+    push(i);
+  }
+}
+
 void Stack::doThings(unsigned int amount,int mode) {
-	for(unsigned int i = 0; i < amount; ++i) {
-		push(i);
-	}
   find(topElem);
 }
 
