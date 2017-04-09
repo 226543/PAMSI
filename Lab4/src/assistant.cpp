@@ -17,7 +17,7 @@ void Assistant::measure(Measurable &obj,int amountOfData,
 }
 
 double Assistant::getAverage(int numberOfReps) {
-  double sum;
+  double sum = 0;
   for(int i = 0; i < numberOfReps; ++i) {
     sum += results[i];
   }

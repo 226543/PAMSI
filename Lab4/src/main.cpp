@@ -3,23 +3,19 @@
 #include "assistant.hh"
 #include "stack.hh"
 #include "list.hh"
+#include "queue.hh"
 
 using namespace std;
 
 int main() {
 	Assistant helper;
-	List obj;
+	Queue obj;
 
-	/*
-	int amountOfData = 100000;     // liczba próbek
+	int amountOfData = 1000;     // liczba próbek
 	int reps = 5;                 // liczba powtórzeń obliczeń
 	int mode = 1;                  // wybór metody
 
 	helper.measure(obj,amountOfData,reps,mode);   // funkcja wyswietla czas sredni
-	*/
-	obj.add(1,1);
-	obj.add(2,2);
-	obj.add(3,3);
-	obj.find(3);
+
 	return 0;
 }

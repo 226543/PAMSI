@@ -43,7 +43,7 @@ void Stack::prepareThings(unsigned int amount) {
 }
 
 void Stack::doThings(unsigned int amount,int mode) {
-  find(topElem);
+  find(-1);
 }
 
 void Stack::restart() {
@@ -53,7 +53,7 @@ void Stack::restart() {
 }
 
 int Stack::find(int value) {
-  int position = 0;
+  int position = 1;
   while(pop() != value) {
     ++position;
   }

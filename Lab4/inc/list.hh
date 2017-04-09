@@ -12,7 +12,6 @@ class List : public iList, public Measurable {
   List() {
     header->setNext(trailer);
     trailer->setPrev(header);
-
   }
   ~List();
 
