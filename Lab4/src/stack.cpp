@@ -10,7 +10,6 @@ int Stack::size()const {
   return topElem-1;
 }
 
-
 void Stack::push(int value) {
     if(size() == capacity) {
       std::cerr << "Stos jest zapełniony" <<std::endl;
