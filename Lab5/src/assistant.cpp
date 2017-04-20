@@ -1,11 +1,9 @@
 #include <iostream>
 #include "assistant.hh"
-#include <cstdlib>
 
 void Assistant::measure(Measurable &obj, int amountOfData,
                         int numberOfReps, int mode1,
                         int mode2) {
-    std::srand(time(NULL));
     for(int i = 0; i < numberOfReps; ++i) {
       obj.prepareThings(amountOfData,mode1);
       stopwatch1.start();

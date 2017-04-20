@@ -171,6 +171,7 @@ void DArray::restart() {
 }
 
 int DArray::getRandom(int a, int b) {
+	std::srand(time(NULL));
 	return std::rand() %(b-a) + a;
 }
 
