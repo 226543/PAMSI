@@ -220,7 +220,7 @@ void DArray::quickSort(int left, int right,int modePivot) {
 	int index = choosePivot(left, right, modePivot);
 	int pivot = tab[index];
 
-	while(i <= j) {
+	do {
 	while(tab[i] < pivot) {
 		++i;
 	}
@@ -232,7 +232,8 @@ void DArray::quickSort(int left, int right,int modePivot) {
 		++i;
 		--j;
 		}
-	}
+	} while(i <= j)
+
 	if (left < j) {
 		quickSort(left, j, modePivot);
 	}
