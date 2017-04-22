@@ -19,13 +19,13 @@ mode2 == 3 to pivotem zostanie środkowy element
 */
 int main() {
 	DArray obj;
-	Assistant helper;
+	Assistant helper(100);
 
 	srand(time(NULL));
-	int amountOfData = 100000;     // liczba próbek
-	int reps = 20;                // liczba powtórzeń obliczeń
-	int mode1 = 3; 								// metoda wypelniania tablicy
-	int mode2 = 1;                // metoda wyboru pivota
+	int amountOfData = 1000000;     // liczba próbek
+	int reps = 100;                // liczba powtórzeń obliczeń
+	int mode1 = 1; 								// metoda wypelniania tablicy
+	int mode2 = 3;                // metoda wyboru pivota
 
 	helper.measure(obj,amountOfData,reps,mode1,mode2);
 	return 0;
