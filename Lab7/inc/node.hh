@@ -1,25 +1,32 @@
 #ifndef NODE_HH
 #define NODE_HH
-#include <iostream>
+#include <string>
 
 class Node {
   private:
-  int value;
+  std::string key;
+  std::string value;
   Node* next;
   Node* prev;
 
   public:
-  Node() : value(0),next(nullptr),prev(nullptr) {};
-  Node (int values, Node* n, Node* p) {
-    value = values;
+  Node() : key(""),value(""),next(nullptr),prev(nullptr) {};
+  Node (std::string newKey, std::string newValue,
+        Node* n = nullptr, Node* p = nullptr) {
+    key = newKey;
+    value = newValue;
     next = n;
     prev = p;
   }
-  int getValue();
-  void setValue(int newValue);
+  std::string getValue() const;
+  void setValue(std::string value);
+
+  std::string getKey() const;
+  void setKey(std::string newKey);
 
   Node* getNext();
   Node* getPrev();
+
   void setNext(Node* N);
   void setPrev(Node* N);
 };

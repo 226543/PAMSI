@@ -1,13 +1,13 @@
 #ifndef IHASHTABLE_HH
 #define IHASHTABLE_HH
-#include <iostream>
 #include <string>
-#include "entry.hh"
 
-class iHashtable : public Entry {
+
+class iHashtable {
   public:
-  virtual void add(Entry newEntry) = 0;
-  virtual int find(std::string requestedEntry) = 0;
+  virtual void insert(std::string key, std::string value) = 0;
+  virtual std::string find(std::string key) = 0;
+  virtual std::string remove(std::string key) = 0;
   ~iHashtable() {};
 };
 

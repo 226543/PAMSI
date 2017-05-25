@@ -1,20 +1,18 @@
 #include <iostream>
 #include <string>
-//#include "hashtable.hh"
+#include "assistant.hh"
+#include "tester.hh"
 
 using namespace std;
 
 int main() {
-	std::string dd = "aa";
-	/*
-	Hashtable test;
-	cout << test.hash(dd);
-	*/
-	int value = 0 ;
-	for (int i = 0; i < dd.length(); i++) {
-		char x = dd.at(i);
-		value += int(x);
-	}
-	cout <<value;
+	Assistant helper(100);
+	Tester obj;
+	int amountOfData = 100000;  // liczba próbek
+	int reps = 100;               // liczba powtórzeń obliczeń
+	int mode = 2;                // wybór funkcji haszującej
+
+	helper.measure(obj,amountOfData,reps,mode);   // funkcja wyswietla czas sredni
+
 	return 0;
 }

@@ -1,19 +1,27 @@
 #include "node.hh"
 
-int Node::getValue() {
-  return this->value;
+std::string Node::getValue() const {
+  return value;
 }
 
-void Node::setValue(int newValue) {
-  value = newValue;
+void Node::setValue(std::string nValue) {
+  value = nValue;
+}
+
+void Node::setKey(std::string newKey) {
+  key = newKey;
+}
+
+std::string Node::getKey() const {
+  return key;
 }
 
 Node* Node::getNext() {
-  return this->next;
+  return next;
 }
 
 Node* Node::getPrev() {
-  return this->prev;
+  return prev;
 }
 
 void Node::setNext(Node* N) {

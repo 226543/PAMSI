@@ -16,8 +16,9 @@ unsigned int List::size()const {
   return count;
 }
 
-void List::addAfter(Node* nodeBefore,int value) {
+void List::addAfter(Node* nodeBefore, std::string key, std::string value) {
   Node* newNode = new Node;
+  newNode->setKey(key);
   newNode->setValue(value);
   newNode->setPrev(nodeBefore);
   newNode->setNext(nodeBefore->getNext());
@@ -25,19 +26,31 @@ void List::addAfter(Node* nodeBefore,int value) {
   nodeBefore->setNext(newNode);
 }
 
-void List::addFront(int value) {
-  addAfter(header,value);
+void List::addFront(std::string key, std::string value) {
+  addAfter(header,key,value);
 }
 
-void List::addBack(int value) {
-  addAfter(trailer->getPrev(),value);
+void List::addBack(std::string key, std::string value) {
+  addAfter(trailer->getPrev(),key,value);
 }
 
-int List::removeElem(Node* nodeToRemove) {
-  int temp = 0;
+std::string List::removeFront() {
+  std::string removedValue;
+  removedValue = removeNode(header->getNext());
+  return removedValue;
+}
+
+std::string List::removeBack() {
+  std::string removedValue;
+  removedValue = removeNode(trailer->getPrev());
+  return removedValue;
+}
+
+std::string List::removeNode(Node* nodeToRemove) {
+  std::string temp;
   Node* nodeBefore = nodeToRemove->getPrev();
   Node* nodeAfter = nodeToRemove->getNext();
-  temp = nodeToRemove->getValue();
+  temp = nodeToRemove->getKey();
 
   nodeBefore->setNext(nodeAfter);
   nodeAfter->setPrev(nodeBefore);
@@ -45,18 +58,6 @@ int List::removeElem(Node* nodeToRemove) {
   delete nodeToRemove;
 
   return temp;
-}
-
-int List::removeFront() {
-  int removedValue;
-  removedValue = removeElem(header->getNext());
-  return removedValue;
-}
-
-int List::removeBack() {
-  int removedValue;
-  removedValue = removeElem(trailer->getPrev());
-  return removedValue;
 }
 
 Node* List::get(unsigned int position) {
@@ -73,24 +74,23 @@ Node* List::get(unsigned int position) {
   return temp;
 }
 
-void List::add(unsigned int position,int value) {
+void List::add(unsigned int position,std::string key, std::string value) {
   if(position == 1) {
-    addFront(value);
+    addFront(key,value);
   }
   else if(position == size()+1) {
-    addBack(value);
+    addBack(key,value);
   }
   else if(position > size()+1 || position <= 0) {
     std::cout << "Chcesz dodać element poza listą! \n";
     exit(EXIT_FAILURE);
   }
   else {
-    addAfter(get(position),value);
+    addAfter(get(position),key,value);
   }
 }
-
-int List::remove(unsigned int position) {
-  int result = 0;
+std::string List::remove(unsigned int position) {
+  std::string result = 0;
   if(position == 1) {
     result = removeFront();
   }
@@ -102,52 +102,54 @@ int List::remove(unsigned int position) {
     exit(EXIT_FAILURE);
   }
   else {
-    result = removeElem(get(position));
+    result = removeNode(get(position));
   }
   return result;
 }
 
-void List::prepareThings(unsigned int amount) {
-  for(unsigned int i = 0; i < amount-1; ++i) {
-  		addBack(i);
-  	}
-  addBack(-1);
+ bool List::removeElem(std::string key) {
+  Node* temp = header->getNext();
+  std::string removedKey;
+  while(temp != trailer) {
+    if(temp->getKey() == key) {
+      Node* nodeBefore = temp->getPrev();
+      Node* nodeAfter = temp->getNext();
+      removedKey = temp->getKey();
+
+      nodeBefore->setNext(nodeAfter);
+      nodeAfter->setPrev(nodeBefore);
+
+      delete temp;
+      return true;
+    }
+  }
+  std::cerr << "NIE MA TAKIEGO ELEMENTU!\n";
+  return false;
 }
 
-void List::doThings(unsigned int amount,int mode) {
-  find(-1);
+std::string List::find(std::string wKey) {
+  Node* temp = header->getNext();
+  bool notFound = true;
+  std::string keyValue;
+
+  while(temp != trailer && notFound ) {
+    if(temp->getKey() == wKey) {
+      keyValue = temp->getValue();
+      notFound = false;
+    }
+    else {
+    temp = temp->getNext();
+  }
+  }
+  if(notFound) {
+    std::cout << "Nie znaleziono tego elementu w liście! Zwracam pierwszy" << std::endl;
+    return (header->getNext())->getValue();
+  }
+  return keyValue;
 }
 
 void List::restart() {
   while(!isEmpty()) {
     removeBack();
   }
-}
-
-List::~List() {
-  while(!isEmpty()) {
-    removeBack();
-  }
-  delete trailer;
-  delete header;
-}
-
-int List::find(int number) {
-  Node* temp = header->getNext();
-  bool notFound = true;
-  int position = 1;
-
-  while(temp != trailer && notFound ) {
-    if(temp->getValue() == number) {
-      notFound = false;
-    }
-    else {
-      ++position;
-    }
-    temp = temp->getNext();
-  }
-  if(notFound) {
-    std::cout << "Tej liczby nie ma w liście!" << std::endl;
-  }
-  return position;
 }

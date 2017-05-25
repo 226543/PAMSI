@@ -5,7 +5,9 @@
 
 class Assistant {
   private:
-  double *results; //tablica służąca do przechowywania wyników pomiarów
+  //tablica służąca do przechowywania wyników pomiarów
+  double *results;
+
   Stopwatch stopwatch1;
 
   double getAverage(int numberOfReps);
@@ -23,6 +25,6 @@ class Assistant {
     delete [] results;
   }
 
-  void measure(Measurable &obj,int amountOfData,int numberOfReps,int mode1,int mode2);
+  void measure(Measurable &obj,int amountOfData,int numberOfReps,int mode);
 };
 #endif
