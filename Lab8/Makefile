@@ -1,25 +1,19 @@
 G = g++
 GFLAGS = -Wall -pedantic -g -std=c++11 -Iinc
 
-__start__: tab
-	./tab
+__start__: zad
+	./zad
 
 obj: mkdir obj
 
-tab: obj/main.o obj/measurable.o obj/stopwatch.o  obj/assistant.o 
-	$(G) $(GFLAGS) ./obj/main.o ./obj/measurable.o ./obj/stopwatch.o  ./obj/assistant.o  -o tab
+zad: obj/main.o obj/tree.o
+	$(G) $(GFLAGS) ./obj/main.o ./obj/tree.o -o zad
 
 obj/main.o: src/main.cpp
 	$(G) $(GFLAGS) -c ./src/main.cpp -o ./obj/main.o
 
-obj/assistant.o: src/assistant.cpp inc/assistant.hh
-	$(G) $(GFLAGS) -c ./src/assistant.cpp -o ./obj/assistant.o
-
-obj/stopwatch.o: src/stopwatch.cpp inc/stopwatch.hh
-	$(G) $(GFLAGS) -c ./src/stopwatch.cpp -o ./obj/stopwatch.o
-
-obj/measurable.o: src/measurable.cpp inc/measurable.hh
-	$(G) $(GFLAGS) -c ./src/measurable.cpp -o ./obj/measurable.o
+obj/tree.o: src/tree.cpp inc/tree.hh
+	$(G) $(GFLAGS) -c ./src/tree.cpp -o ./obj/tree.o
 
 clean:
-	rm -fr ./obj/*.o tab
+	rm -fr ./obj/*.o zad
