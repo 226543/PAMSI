@@ -44,17 +44,18 @@ void Node::setColour(Color newColour) {
 Node* RBTree::getRoot() {
   return root;
 }
+
 void RBTree::leftRotate(Node* x) {
   Node* y = x->getRight();
   x->setRight( y->getLeft() );
 
-  if (y->getLeft() == nullptr) {
+  if (y->getLeft() == sentinel) {
     y->getLeft()->setParent(x);
   }
 
   y->setParent( x->getParent() );
 
-  if (x->getParent() == nullptr) {
+  if (x->getParent() == sentinel) {
     root = y;
   }
   else if (x == (x->getParent())->getLeft()) {
@@ -72,13 +73,13 @@ void RBTree::rightRotate(Node* x) {
   Node* y = x->getLeft();
   x->setLeft( y->getRight() );
 
-  if (y->getRight() == nullptr) {
+  if (y->getRight() == sentinel) {
     (y->getRight())->setParent(x);
   }
 
   y->setParent( x->getParent() );
 
-  if (x->getParent() == nullptr) {
+  if (x->getParent() == sentinel) {
     root = y;
   }
   else if (x == (x->getParent())->getRight()) {
@@ -95,10 +96,13 @@ void RBTree::rightRotate(Node* x) {
 
 void RBTree::insert(int newValue) {
   Node* z = new Node(newValue);
+    z ->setLeft(sentinel);
+    z ->setRight(sentinel);
+    z ->setColour(red);
   Node* x = root;
-  Node* y = nullptr;
+  Node* y = sentinel;
 
-  while (x != nullptr) {
+  while (x != sentinel) {
     y = x;
     if (newValue < x->getValue()) {
       x = x->getLeft();
@@ -110,8 +114,10 @@ void RBTree::insert(int newValue) {
 
   z->setParent(y);
 
-  if (y == nullptr) {
+  if (y == sentinel) {
     root = z;
+      root->setRight(sentinel);
+      root->setLeft(sentinel);
   }
   else {
     if (newValue < y->getValue()) {
@@ -177,12 +183,11 @@ void RBTree::fixTree(Node* x) {
 bool RBTree::search (int value) {
 	bool found = false;
 		Node* current = root;
-		if (root == nullptr) {
+		if (root == sentinel) {
 			std::cerr << "Próbujesz wyszukać element w pustym drzewie\n";
 			return false;
 		}
-		while (found==false && current != nullptr) {
-      std::cout << current->getValue() <<std::endl;
+		while (found==false && current != sentinel) {
 			if (current->getValue() == value) {
         found = true;
       }
@@ -196,7 +201,7 @@ bool RBTree::search (int value) {
       }
     }
 		if (found == true) {
-      std::cout << "MAM\n";
+      std::cout << std::endl << "I FOUND!\n";
       return true;
     }
 		else {

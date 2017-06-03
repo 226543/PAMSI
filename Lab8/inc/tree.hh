@@ -12,7 +12,7 @@ class Node {
   Node* right;
 
   public:
-  Node (int newValue): val {newValue}, colour {red}, parent {nullptr} , left{nullptr}, right{nullptr} {}
+  Node (int newValue): val {newValue}, colour {black}, parent {nullptr} , left{nullptr}, right{nullptr} {}
 
   int getValue()const;
   void setValue(int newValue);
@@ -32,12 +32,17 @@ class Node {
 
 class RBTree {
   private:
-  Node* root;
-
+    Node* sentinel;
+    Node* root;
   void fixTree(Node *node);
   public:
   RBTree() {
-    root = nullptr;
+
+      sentinel = new Node(0);
+      sentinel -> setParent(sentinel);
+      sentinel -> setLeft(sentinel);
+      sentinel -> setRight(sentinel);
+    root = sentinel;
   }
 
   ~RBTree() {
