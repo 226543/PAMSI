@@ -22,7 +22,7 @@ class Assistant {
   ~Assistant() {
     delete [] results;
   }
-  
-  void measure(Measurable &obj,int amountOfData,int numberOfReps,int mode);
+
+  void measure(Measurable &obj,int amountOfData,int numberOfReps);
 };
 #endif

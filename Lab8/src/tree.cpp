@@ -1,5 +1,5 @@
 #include <iostream>
-#include "tree.hh"
+#include "../inc/tree.hh"
 
 int Node::getValue()const {
   return val;
@@ -188,6 +188,7 @@ bool RBTree::search (int value) {
 			return false;
 		}
 		while (found==false && current != sentinel) {
+      std::cout << current->getValue() << std::endl;
 			if (current->getValue() == value) {
         found = true;
       }
@@ -201,7 +202,7 @@ bool RBTree::search (int value) {
       }
     }
 		if (found == true) {
-      std::cout << std::endl << "I FOUND!\n";
+      std::cout << std::endl <<"Znaleziono element!\n";
       return true;
     }
 		else {

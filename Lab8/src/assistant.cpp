@@ -2,11 +2,11 @@
 #include "assistant.hh"
 
 void Assistant::measure(Measurable &obj,int amountOfData,
-                        int numberOfReps,int mode) {
+                        int numberOfReps) {
     for(int i = 0; i < numberOfReps; ++i) {
       obj.prepareThings(amountOfData);
       stopwatch1.start();
-      obj.doThings(amountOfData,mode);
+      obj.doThings(amountOfData);
       stopwatch1.stop();
       results[i] = stopwatch1.result();
       stopwatch1.reset();
