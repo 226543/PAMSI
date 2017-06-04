@@ -1,5 +1,5 @@
 #include <iostream>
-#include "assistant.hh"
+#include "../inc/assistant.hh"
 
 void Assistant::measure(Measurable &obj,int amountOfData,
                         int numberOfReps) {

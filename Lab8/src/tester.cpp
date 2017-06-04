@@ -1,4 +1,4 @@
-#include "tester.hh"
+#include "../inc/tester.hh"
 #include <iostream>
 
 void Tester::prepareThings(unsigned int amount) {

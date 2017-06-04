@@ -49,7 +49,7 @@ void RBTree::leftRotate(Node* x) {
   Node* y = x->getRight();
   x->setRight( y->getLeft() );
 
-  if (y->getLeft() == sentinel) {
+  if (y->getLeft() != sentinel) {
     y->getLeft()->setParent(x);
   }
 
@@ -59,10 +59,10 @@ void RBTree::leftRotate(Node* x) {
     root = y;
   }
   else if (x == (x->getParent())->getLeft()) {
-    (x->getParent())->setLeft(y);
+    x->getParent()->setLeft(y);
   }
   else {
-    (x->getParent())->setRight(y);
+    x->getParent()->setRight(y);
   }
 
   y->setLeft(x);
@@ -73,8 +73,8 @@ void RBTree::rightRotate(Node* x) {
   Node* y = x->getLeft();
   x->setLeft( y->getRight() );
 
-  if (y->getRight() == sentinel) {
-    (y->getRight())->setParent(x);
+  if (y->getRight() != sentinel) {
+    y->getRight()->setParent(x);
   }
 
   y->setParent( x->getParent() );
@@ -83,10 +83,10 @@ void RBTree::rightRotate(Node* x) {
     root = y;
   }
   else if (x == (x->getParent())->getRight()) {
-    (x->getParent())->setRight(y);
+    x->getParent()->setRight(y);
   }
   else {
-    (x->getParent())->setLeft(y);
+    x->getParent()->setLeft(y);
   }
 
   y->setRight(x);
@@ -96,11 +96,11 @@ void RBTree::rightRotate(Node* x) {
 
 void RBTree::insert(int newValue) {
   Node* z = new Node(newValue);
-    z ->setLeft(sentinel);
-    z ->setRight(sentinel);
-    z ->setColour(red);
   Node* x = root;
   Node* y = sentinel;
+  z ->setLeft(sentinel);
+  z ->setRight(sentinel);
+  z ->setColour(red);
 
   while (x != sentinel) {
     y = x;
@@ -116,43 +116,40 @@ void RBTree::insert(int newValue) {
 
   if (y == sentinel) {
     root = z;
-      root->setRight(sentinel);
-      root->setLeft(sentinel);
+    root->setRight(sentinel);
+    root->setLeft(sentinel);
+  }
+  else if (newValue < y->getValue()) {
+      y->setLeft(z);
   }
   else {
-    if (newValue < y->getValue()) {
-      y->setLeft(z);
-    }
-    else {
-      y->setRight(z);
-    }
+    y->setRight(z);
   }
   fixTree(z);
 }
 
 void RBTree::fixTree(Node* x) {
-	while (x != root && x->getParent()->getColour() == red) {
+	while (x->getParent()->getColour() == red) {
 		if (x->getParent() == x->getParent()->getParent()->getLeft()) {
-			  Node* y = x->getParent()->getParent()->getRight();
-      // przypadek 1
-			if (y->getColour() == red) {
-			  x->getParent()->setColour(black);
-			  y->setColour(black);
-				x->getParent()->getParent()->setColour(red);
-				x = x->getParent()->getParent();
-			}
-			else {
-        // przypadek 2
-        if (x == x->getParent()->getRight())  {
-          x = x->getParent();
-          leftRotate(x);
+            Node *y = x->getParent()->getParent()->getRight();
+            // przypadek 1
+            if (y->getColour() == red) {
+                x->getParent()->setColour(black);
+                y->setColour(black);
+                x->getParent()->getParent()->setColour(red);
+                x = x->getParent()->getParent();
+            } // przypadek 2
+            else {
+                if (x == x->getParent()->getRight()) {
+                    x = x->getParent();
+                    leftRotate(x);
+                }
+                // przypadek 3
+                x->getParent()->setColour(black);
+                x->getParent()->getParent()->setColour(red);
+                rightRotate(x->getParent()->getParent());
+            }
         }
-        // przypadek 3
-        x->getParent()->setColour(black);
-        x->getParent()->getParent()->setColour(red);
-        rightRotate(x->getParent()->getParent());
-      }
-    }
     else {
       Node* y = x->getParent()->getParent()->getLeft();
       // przypadek 1
@@ -161,17 +158,17 @@ void RBTree::fixTree(Node* x) {
         y->setColour(black);
         x->getParent()->getParent()->setColour(red);
         x = x->getParent()->getParent();
-      }
+      } // przypadek 2
       else {
-        // przypadek 2
-        if (x == x->getParent()->getLeft())  {
-          x = x->getParent();
-          rightRotate(x);
-        }
-        // przypadek 3
-        x->getParent()->setColour(black);
-        x->getParent()->getParent()->setColour(red);
-        leftRotate(x->getParent()->getParent());
+          if (x == x->getParent()->getLeft())  {
+              x = x->getParent();
+              rightRotate(x);
+          }
+
+      // przypadek 3
+      x->getParent()->setColour(black);
+      x->getParent()->getParent()->setColour(red);
+      leftRotate(x->getParent()->getParent());
       }
     }
   }
@@ -188,7 +185,6 @@ bool RBTree::search (int value) {
 			return false;
 		}
 		while (found==false && current != sentinel) {
-      std::cout << current->getValue() << std::endl;
 			if (current->getValue() == value) {
         found = true;
       }
@@ -208,4 +204,141 @@ bool RBTree::search (int value) {
 		else {
       return false;
     }
+}
+
+Node* RBTree::minimum (Node* x) {
+  while (x->getLeft() != sentinel) {
+    x = x->getLeft();
+  }
+  return x;
+}
+
+void RBTree::transplant (Node* u, Node* v) {
+  if (u->getParent() == sentinel) {
+    root = v;
+  }
+  else if (u == u->getParent()->getLeft()) {
+    u->getParent()->setLeft(v);
+  }
+  else {
+    u->getParent()->setRight(v);
+  }
+  v->setParent( u->getParent() );
+}
+
+void RBTree::remove (Node* z) {
+  Node* y = z;
+  Node* x;
+  Color orginalColor = y->getColour();
+  if (z->getLeft() == sentinel) {
+    x = z->getRight();
+    transplant(z,x);
+  }
+  else {
+  if (z->getRight() == sentinel) {
+    x = z->getLeft();
+    transplant(z,x);
+  }
+  else {
+    y = minimum(z->getRight());
+    orginalColor = y->getColour();
+    x = y->getRight();
+    if (y->getParent() == z) {
+      x->setParent(y);
+    }
+    else {
+      transplant(y,y->getRight());
+      y->setRight( z->getRight() );
+      y->getRight()->setParent(y);
+    }
+    y->setLeft( z->getLeft() );
+    y->getLeft()->setParent(y);
+    y->setColour( z->getColour() );
+  }
+  if (orginalColor == black) {
+    deleteFix(x);
+  }
+}
+}
+
+void RBTree::deleteFix(Node* x) {
+  while (x != root && x->getColour() == black) {
+    if (x == x->getParent()->getLeft()) {
+      Node* w = x->getParent()->getRight();
+      if (w->getColour() == red) {
+        w->setColour(black);
+        x->getParent()->setColour(red);
+        leftRotate(x->getParent());
+        w = x->getParent()->getRight();
+      }
+      if (w->getLeft()->getColour() == black &&
+          w->getRight()->getColour() == black) {
+        w->setColour(red);
+        x = x->getParent();
+      }
+      else {
+        if (w->getRight()->getColour() == black) {
+          w->getLeft()->setColour(black);
+          w->setColour(red);
+          rightRotate(w);
+          w = w->getParent()->getRight();
+        }
+        w->setColour( x->getParent()->getColour() );
+        x->getParent()->setColour(black);
+        w->getRight()->setColour(black);
+        leftRotate(x->getParent());
+        x = root;
+      }
+    }
+    else {
+      Node* w = x->getParent()->getLeft();
+      if (w->getColour() == red) {
+        w->setColour(black);
+        x->getParent()->setColour(red);
+        rightRotate(x->getParent());
+        w = x->getParent()->getLeft();
+      }
+      if (w->getRight()->getColour() == black &&
+          w->getLeft()->getColour() == black) {
+        w->setColour(red);
+        x = x->getParent();
+      }
+      else {
+        if (w->getLeft()->getColour() == black) {
+          w->getRight()->setColour(black);
+          w->setColour(red);
+          leftRotate(w);
+          w = w->getParent()->getLeft();
+        }
+        w->setColour( x->getParent()->getColour() );
+        x->getParent()->setColour(black);
+        w->getLeft()->setColour(black);
+        rightRotate(x->getParent());
+        x = root;
+    }
+  }
+}
+delete x;
+}
+
+void RBTree::print(Node* node) {
+  if (node == sentinel)
+    return;
+  print(node->getLeft());
+  std::cout << node->getValue() << " ";
+  print(node->getRight());
+}
+
+void RBTree::deleteTree() {
+  deleteWithoutFix(root);
+}
+
+
+void RBTree::deleteWithoutFix (Node* node) {
+  if (node == sentinel) {
+    return;
+  }
+  deleteWithoutFix(node->getLeft());
+  deleteWithoutFix(node->getRight());
+  delete node;
 }

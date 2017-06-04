@@ -54,7 +54,13 @@ class RBTree {
   void rightRotate(Node* rNode);
   void insert(int newValue);
   bool search (int value);
-
+  Node* minimum (Node* x);
+  void transplant (Node* u, Node* v);
+  void remove (Node* z);
+  void deleteFix(Node* x);
+  void print(Node* node);
+  void deleteTree();
+  void deleteWithoutFix(Node* node);
 };
 
 #endif

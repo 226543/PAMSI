@@ -1,5 +1,5 @@
 #include <iostream>
-#include "stopwatch.hh"
+#include "../inc/stopwatch.hh"
 
 void Stopwatch::start() {
   gettimeofday(&startTime, NULL);

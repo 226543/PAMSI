@@ -1,7 +1,7 @@
 #ifndef ASSISTANT_HH
 #define ASSISTANT_HH
-#include "stopwatch.hh"
-#include "measurable.hh"
+#include "../inc/stopwatch.hh"
+#include "../inc/measurable.hh"
 
 class Assistant {
   private:

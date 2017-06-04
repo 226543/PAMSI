@@ -2,8 +2,8 @@
 #define TESTER_HH
 #include <iostream>
 #include <random>
-#include "measurable.hh"
-#include "tree.hh"
+#include "../inc/measurable.hh"
+#include "../inc/tree.hh"
 
 
 class Tester: public Measurable {
