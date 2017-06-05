@@ -5,7 +5,7 @@ enum Color {red,black};
 
 class Node {
   private:
-  int val = 0;
+  int val;
   Color colour;
   Node* parent;
   Node* left;
@@ -32,21 +32,22 @@ class Node {
 
 class RBTree {
   private:
-    Node* sentinel;
-    Node* root;
+  Node* sentinel;
+  Node* root;
   void fixTree(Node *node);
+
   public:
   RBTree() {
-
-      sentinel = new Node(0);
-      sentinel -> setParent(sentinel);
-      sentinel -> setLeft(sentinel);
-      sentinel -> setRight(sentinel);
+    sentinel = new Node(0);
+    sentinel -> setParent(sentinel);
+    sentinel -> setLeft(sentinel);
+    sentinel -> setRight(sentinel);
     root = sentinel;
   }
 
-  ~RBTree() {
-    //delete root;
+  virtual ~RBTree() {
+    removeNode(root);
+    delete sentinel;
   }
 
   Node* getRoot();
@@ -54,13 +55,8 @@ class RBTree {
   void rightRotate(Node* rNode);
   void insert(int newValue);
   bool search (int value);
-  Node* minimum (Node* x);
-  void transplant (Node* u, Node* v);
-  void remove (Node* z);
-  void deleteFix(Node* x);
   void print(Node* node);
-  void deleteTree();
-  void deleteWithoutFix(Node* node);
+  void removeNode(Node* node);
 };
 
 #endif

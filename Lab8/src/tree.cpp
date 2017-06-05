@@ -179,146 +179,32 @@ void RBTree::fixTree(Node* x) {
 
 bool RBTree::search (int value) {
 	bool found = false;
-		Node* current = root;
-		if (root == sentinel) {
-			std::cerr << "Próbujesz wyszukać element w pustym drzewie\n";
-			return false;
-		}
-		while (found==false && current != sentinel) {
-			if (current->getValue() == value) {
-        found = true;
-      }
-			if (found==false) {
-				if (current->getValue() > value) {
-					current = current->getLeft();
-				}
-				else {
-          current = current->getRight();
-			  }
-      }
+	Node* current = root;
+	if (root == sentinel) {
+		std::cerr << "Próbujesz wyszukać element w pustym drzewie\n";
+		return false;
+	}
+	while (found==false && current != sentinel) {
+		if (current->getValue() == value) {
+      found = true;
     }
-		if (found == true) {
-      std::cout << std::endl <<"Znaleziono element!\n";
-      return true;
-    }
-		else {
-      return false;
-    }
-}
-
-Node* RBTree::minimum (Node* x) {
-  while (x->getLeft() != sentinel) {
-    x = x->getLeft();
-  }
-  return x;
-}
-
-void RBTree::transplant (Node* u, Node* v) {
-  if (u->getParent() == sentinel) {
-    root = v;
-  }
-  else if (u == u->getParent()->getLeft()) {
-    u->getParent()->setLeft(v);
-  }
-  else {
-    u->getParent()->setRight(v);
-  }
-  v->setParent( u->getParent() );
-}
-
-void RBTree::remove (Node* z) {
-  Node* y = z;
-  Node* x;
-  Color orginalColor = y->getColour();
-  if (z->getLeft() == sentinel) {
-    x = z->getRight();
-    transplant(z,x);
-  }
-  else {
-  if (z->getRight() == sentinel) {
-    x = z->getLeft();
-    transplant(z,x);
-  }
-  else {
-    y = minimum(z->getRight());
-    orginalColor = y->getColour();
-    x = y->getRight();
-    if (y->getParent() == z) {
-      x->setParent(y);
-    }
-    else {
-      transplant(y,y->getRight());
-      y->setRight( z->getRight() );
-      y->getRight()->setParent(y);
-    }
-    y->setLeft( z->getLeft() );
-    y->getLeft()->setParent(y);
-    y->setColour( z->getColour() );
-  }
-  if (orginalColor == black) {
-    deleteFix(x);
-  }
-}
-}
-
-void RBTree::deleteFix(Node* x) {
-  while (x != root && x->getColour() == black) {
-    if (x == x->getParent()->getLeft()) {
-      Node* w = x->getParent()->getRight();
-      if (w->getColour() == red) {
-        w->setColour(black);
-        x->getParent()->setColour(red);
-        leftRotate(x->getParent());
-        w = x->getParent()->getRight();
-      }
-      if (w->getLeft()->getColour() == black &&
-          w->getRight()->getColour() == black) {
-        w->setColour(red);
-        x = x->getParent();
-      }
-      else {
-        if (w->getRight()->getColour() == black) {
-          w->getLeft()->setColour(black);
-          w->setColour(red);
-          rightRotate(w);
-          w = w->getParent()->getRight();
-        }
-        w->setColour( x->getParent()->getColour() );
-        x->getParent()->setColour(black);
-        w->getRight()->setColour(black);
-        leftRotate(x->getParent());
-        x = root;
-      }
-    }
-    else {
-      Node* w = x->getParent()->getLeft();
-      if (w->getColour() == red) {
-        w->setColour(black);
-        x->getParent()->setColour(red);
-        rightRotate(x->getParent());
-        w = x->getParent()->getLeft();
-      }
-      if (w->getRight()->getColour() == black &&
-          w->getLeft()->getColour() == black) {
-        w->setColour(red);
-        x = x->getParent();
-      }
-      else {
-        if (w->getLeft()->getColour() == black) {
-          w->getRight()->setColour(black);
-          w->setColour(red);
-          leftRotate(w);
-          w = w->getParent()->getLeft();
-        }
-        w->setColour( x->getParent()->getColour() );
-        x->getParent()->setColour(black);
-        w->getLeft()->setColour(black);
-        rightRotate(x->getParent());
-        x = root;
+		if (found==false) {
+		  if (current->getValue() > value) {
+				current = current->getLeft();
+			}
+			else {
+        current = current->getRight();
+			}
     }
   }
-}
-delete x;
+	if (found == true) {
+    //std::cout << std::endl <<"Znaleziono element!\n";
+    return true;
+  }
+	else {
+    std::cout << std::endl <<"Nie znaleziono elementu!\n";
+    return false;
+  }
 }
 
 void RBTree::print(Node* node) {
@@ -329,16 +215,11 @@ void RBTree::print(Node* node) {
   print(node->getRight());
 }
 
-void RBTree::deleteTree() {
-  deleteWithoutFix(root);
-}
-
-
-void RBTree::deleteWithoutFix (Node* node) {
-  if (node == sentinel) {
-    return;
+void RBTree::removeNode (Node* node) {
+  if(node != sentinel && node != root) {
+    removeNode(node->getLeft());
+    removeNode(node->getRight());
+    delete node;
   }
-  deleteWithoutFix(node->getLeft());
-  deleteWithoutFix(node->getRight());
-  delete node;
+  root = sentinel;
 }

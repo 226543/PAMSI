@@ -14,7 +14,9 @@ class Tester: public Measurable {
   Tester() {
     tree = new RBTree();
   };
-  ~Tester() {};
+  ~Tester() {
+    delete tree;
+  }
 
   void prepareThings(unsigned int amount);
   void doThings(unsigned int amount);
