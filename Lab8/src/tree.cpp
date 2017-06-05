@@ -129,27 +129,27 @@ void RBTree::insert(int newValue) {
 }
 
 void RBTree::fixTree(Node* x) {
-	while (x->getParent()->getColour() == red) {
+  while (x->getParent()->getColour() == red) {
 		if (x->getParent() == x->getParent()->getParent()->getLeft()) {
-            Node *y = x->getParent()->getParent()->getRight();
-            // przypadek 1
-            if (y->getColour() == red) {
-                x->getParent()->setColour(black);
-                y->setColour(black);
-                x->getParent()->getParent()->setColour(red);
-                x = x->getParent()->getParent();
-            } // przypadek 2
-            else {
-                if (x == x->getParent()->getRight()) {
-                    x = x->getParent();
-                    leftRotate(x);
-                }
-                // przypadek 3
-                x->getParent()->setColour(black);
-                x->getParent()->getParent()->setColour(red);
-                rightRotate(x->getParent()->getParent());
-            }
+      Node *y = x->getParent()->getParent()->getRight();
+      // przypadek 1
+      if (y->getColour() == red) {
+        x->getParent()->setColour(black);
+        y->setColour(black);
+        x->getParent()->getParent()->setColour(red);
+        x = x->getParent()->getParent();
+      } // przypadek 2
+      else {
+        if (x == x->getParent()->getRight()) {
+          x = x->getParent();
+          leftRotate(x);
         }
+        // przypadek 3
+        x->getParent()->setColour(black);
+        x->getParent()->getParent()->setColour(red);
+        rightRotate(x->getParent()->getParent());
+      }
+    }
     else {
       Node* y = x->getParent()->getParent()->getLeft();
       // przypadek 1
@@ -160,15 +160,15 @@ void RBTree::fixTree(Node* x) {
         x = x->getParent()->getParent();
       } // przypadek 2
       else {
-          if (x == x->getParent()->getLeft())  {
-              x = x->getParent();
-              rightRotate(x);
-          }
+        if (x == x->getParent()->getLeft())  {
+          x = x->getParent();
+          rightRotate(x);
+        }
 
-      // przypadek 3
-      x->getParent()->setColour(black);
-      x->getParent()->getParent()->setColour(red);
-      leftRotate(x->getParent()->getParent());
+        // przypadek 3
+        x->getParent()->setColour(black);
+        x->getParent()->getParent()->setColour(red);
+        leftRotate(x->getParent()->getParent());
       }
     }
   }
@@ -178,30 +178,30 @@ void RBTree::fixTree(Node* x) {
 
 
 bool RBTree::search (int value) {
-	bool found = false;
-	Node* current = root;
-	if (root == sentinel) {
-		std::cerr << "Próbujesz wyszukać element w pustym drzewie\n";
-		return false;
+  bool found = false;
+  Node* current = root;
+  if (root == sentinel) {
+    std::cerr << "Próbujesz wyszukać element w pustym drzewie\n";
+	  return false;
 	}
-	while (found==false && current != sentinel) {
-		if (current->getValue() == value) {
+  while (found==false && current != sentinel) {
+	  if (current->getValue() == value) {
       found = true;
     }
 		if (found==false) {
-		  if (current->getValue() > value) {
-				current = current->getLeft();
-			}
-			else {
+	    if (current->getValue() > value) {
+			  current = current->getLeft();
+      }
+      else {
         current = current->getRight();
-			}
+      }
     }
   }
-	if (found == true) {
+  if (found == true) {
     //std::cout << std::endl <<"Znaleziono element!\n";
     return true;
   }
-	else {
+  else {
     std::cout << std::endl <<"Nie znaleziono elementu!\n";
     return false;
   }

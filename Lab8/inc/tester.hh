@@ -13,7 +13,7 @@ class Tester: public Measurable {
   public:
   Tester() {
     tree = new RBTree();
-  };
+  }
   ~Tester() {
     delete tree;
   }
