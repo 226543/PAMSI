@@ -182,15 +182,15 @@ bool RBTree::search (int value) {
   Node* current = root;
   if (root == sentinel) {
     std::cerr << "Próbujesz wyszukać element w pustym drzewie\n";
-	  return false;
-	}
+    return false;
+  }
   while (found==false && current != sentinel) {
-	  if (current->getValue() == value) {
+    if (current->getValue() == value) {
       found = true;
     }
-		if (found==false) {
-	    if (current->getValue() > value) {
-			  current = current->getLeft();
+    if (found==false) {
+      if (current->getValue() > value) {
+        current = current->getLeft();
       }
       else {
         current = current->getRight();
