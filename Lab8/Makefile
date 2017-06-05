@@ -10,7 +10,7 @@ zad: obj/main.o obj/tree.o obj/assistant.o obj/measurable.o obj/tester.o obj/sto
 obj/main.o: src/main.cpp
 	$(G) $(GFLAGS) -c ./src/main.cpp -o ./obj/main.o
 
-obj/tree.o: src/tree.cpp inc/tree.hh
+obj/tree.o: src/tree.cpp inc/tree.hh inc/ibinarytree.hh
 	$(G) $(GFLAGS) -c ./src/tree.cpp -o ./obj/tree.o
 
 obj/assistant.o: src/assistant.cpp inc/assistant.hh

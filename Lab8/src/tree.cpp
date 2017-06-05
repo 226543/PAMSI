@@ -223,3 +223,17 @@ void RBTree::removeNode (Node* node) {
   }
   root = sentinel;
 }
+
+Node* RBTree::getMin (Node* x) {
+  while (x->getLeft() != sentinel) {
+    x = x->getLeft();
+  }
+  return x;
+}
+
+Node* RBTree::getMax (Node* x) {
+  while (x->getRight() != sentinel) {
+    x = x->getRight();
+  }
+  return x;
+}

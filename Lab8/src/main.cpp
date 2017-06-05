@@ -5,11 +5,11 @@
 using namespace std;
 
 int main() {
-	Assistant helper;
+	Assistant helper(100);
 	Tester obj;
 
-	int amountOfData = 10000;     // liczba próbek
-	int reps = 20;                 // liczba powtórzeń obliczeń
+	int amountOfData = 1000;     // liczba próbek
+	int reps = 100;                 // liczba powtórzeń obliczeń
 	helper.measure(obj,amountOfData,reps);   // funkcja wyswietla czas sredni
 
 	return 0;

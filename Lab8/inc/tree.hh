@@ -1,5 +1,6 @@
 #ifndef TREE_HH
 #define TREE_HH
+#include "ibinarytree.hh"
 
 enum Color {red,black};
 
@@ -30,7 +31,7 @@ class Node {
   void setColour(Color newColour);
 };
 
-class RBTree {
+class RBTree: public IBinaryTree {
   private:
   Node* sentinel;
   Node* root;
@@ -57,6 +58,8 @@ class RBTree {
   bool search (int value);
   void print(Node* node);
   void removeNode(Node* node);
+  Node* getMin (Node* x);
+  Node* getMax (Node* x);
 };
 
 #endif
